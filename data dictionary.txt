@@ -1,0 +1,198 @@
+=============================
+IMPORTANT NOTES
+=============================
+Regarding reply or quote tweet chains: This data set only includes first level references. Specifically, rows containing retweets will contain information about the original tweet and retweet; rows containing quote tweets will contain information about the quote tweet and original tweet (the tweet to which the quote tweet was made in response); rows containing replies will contain information about the reply and the tweet to which the tweet replied; original tweets will have information only about the original tweet.
+
+There is no further information in this data set about replies to replies (i.e. if a tweet in the set is a reply to a reply, there is no information about the first tweet in the reply chain).
+
+=============================
+PROFILE DATA https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/user
+=============================
+
+account_created_at
+    date and time at which the author account was registered
+
+description
+    user-added description found below the username on the profile screen
+
+verified	
+    whether or not the account is verrified
+
+profile_image_url	
+    static url to account's profile image
+
+profile_description_url	
+    urls found in the account description
+
+name	
+    profile name. NOT the handle which contains "@"
+
+followers_count	
+    number of accounts following the author account
+
+following_count
+    number of accounts the author is following
+
+tweet_count	
+    number of tweets an author has published including retweets
+
+listed_count	
+    "The number of public lists that this user is a member of" 
+
+location	
+    "The location specified in the user's profile, if the user provided one. As this is a freeform value, it may not indicate a valid location, but it may be fuzzily evaluated when performing searches with location queries."
+
+protected	
+    "Indicates if this user has chosen to protect their Tweets (in other words, if this user's Tweets are private)."
+
+twitter_handle	
+    "The Twitter screen name, handle, or alias that this user identifies themselves with. Usernames are unique but subject to change. Typically a maximum of 15 characters long, but some historical accounts may exist with longer names." (on the website, it is seen with the "@" symbol)
+
+description_hashtags
+    list of hashtags found in the profile description
+
+description_mentions
+    list of mentions found in the profile description (see mentions for more information)
+
+description_urls
+    list of urls found in the profile description
+
+=============================
+TWEET DATA https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/tweet
+=============================
+tweet_type	
+    whether the tweet is a retweet, quoted tweet, or an original tweet
+
+referenced_tweet_id
+    tweet_id of the retweeted or quoted tweet (if the tweet is a retweet or quoted tweet)
+    
+tweet_id	
+    "The unique identifier of the requested Tweet."
+
+text
+    "The actual UTF-8 text of the Tweet. See twitter-text for details on what characters are currently considered valid." For replies, original tweets, and quote tweets, this text is the full text of the tweet. For retweets, the text is truncated and the full text of the original tweet is found in the "referenced_tweet_text" column.
+
+edit_history_tweet_ids	
+    "Unique identifiers indicating all versions of a Tweet. For Tweets with no edits, there will be one ID. For Tweets with an edit history, there will be multiple IDs, arranged in ascending order reflecting the order of edits. The most recent version is the last position of the array."
+
+author_id	
+    "The unique identifier of the User who posted this Tweet."
+    
+context_annotations	
+    "Contains context annotations for the Tweet."
+
+conversation_id	
+    "The Tweet ID of the original Tweet of the conversation (which includes direct replies, replies of replies)."
+    
+tweet_created_at	
+    creation date and time of the tweet
+
+edit_controls	
+    "When present, this indicates how much longer the Tweet can be edited and the number of remaining edits. Tweets are only editable for the first 30 minutes after creation and can be edited up to five times."
+
+in_reply_to_user_id	
+    "If the represented Tweet is a reply, this field will contain the original Tweet’s author ID. This will not necessarily always be the user directly mentioned in the Tweet."
+
+lang	
+    language of the tweet
+
+non_public_metrics	
+    "Non-public engagement metrics for the Tweet at the time of the request. Requires user context authentication."
+
+organic_metrics	
+    "Engagement metrics, tracked in an organic context, for the Tweet at the time of the request. Requires user context authentication."
+
+possibly_sensitive	
+    "This field indicates content may be recognized as sensitive. The Tweet author can select within their own account preferences and choose “Mark media you tweet as having material that may be sensitive” so each Tweet created after has this flag set. This may also be judged and labeled by an internal Twitter support agent."
+
+promoted_metrics	
+    "Engagement metrics, tracked in a promoted context, for the Tweet at the time of the request.Requires user context authentication."
+
+reply_settings	
+    'Shows you who can reply to a given Tweet. Fields returned are "everyone", "mentioned_users", and "followers".'
+
+source	
+    "The name of the app the user Tweeted from."
+
+withheld	
+    "When present, contains withholding details for withheld content."
+
+tweet_hashtags	
+    list of hashtags found in the tweet. This column takes the form of a list of dictionaries (one for each hashtag) and includes the starting and ending character position and content of the hashtag.
+
+in_tweet_urls
+    list of urls found in the tweet This column takes the form of a list of dictionaries (one for each url) and includes the starting and ending character position and the full url.
+    
+mentions	
+    list of mentions of other usernames found in the tweet. Will follow the format "@..." This column takes the form of a list of dictionaries (one for each mention) and includes the starting and ending character position and content of the mention (including the handle and id of the mentioned profile).
+
+symbols	
+    list of special non-character symbols found in the tweet
+
+polls
+    polling information found in the tweet
+    
+like_count
+    number of likes
+    
+reply_count
+    number of replies to this tweet
+    
+quote_count
+    number of times users have quoted the tweet
+    
+retweet_count
+    number of times users have retweet the tweet
+    
+
+=============================
+MEDIA DATA https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/media
+
+There can be up to 4 pieces of media in each tweet, therefore there are 4 of each column numbered media_1 through media_4
+=============================
+
+media_x_media_key	
+    "Unique identifier of the expanded media content."
+
+media_x_type
+    "Type of content (animated_gif, photo, video)."
+
+media_x_url	
+    "A direct URL to the media file on Twitter."
+
+media_x_duration_ms	
+    "Available when type is video. Duration in milliseconds of the video."
+
+media_x_non_public_metrics	
+    "Non-public engagement metrics for the media content at the time of the request. Requires user context authentication."
+
+media_x_organic_metrics	
+    "Engagement metrics for the media content, tracked in an organic context, at the time of the request. Requires user context authentication."
+
+media_x_view_count
+    number of times the media content has been viewed
+    
+media_x_promoted_metrics	
+    "Engagement metrics for the media content, tracked in a promoted context, at the time of the request. Requires user context authentication."
+
+media_x_height	
+    "Height of this content in pixels."
+
+media_x_width	
+    "Width of this content in pixels."
+
+media_x_alt_text	
+    "A description of an image to enable and support accessibility. Can be up to 1000 characters long. Alt text can only be added to images at the moment."
+
+media_x_variants	
+    "Each media object may have multiple display or playback variants, with different resolutions or formats"
+    
+=============================
+REFERENCED TWEET DATA
+=============================
+any column beginning with "referenced_tweet_"
+
+If the tweet is a reply, these columns refer to the tweet which the tweet is in reply to.
+Similarly, if the tweet is a quote tweet or a retweet, these columns refer to the orignal tweet.
+The format of these columns follows the format of the associated columns. 
+For example, you can find information on the "referenced_tweet_media_1_url" in the section regarding media data.
